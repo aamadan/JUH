@@ -1,0 +1,32 @@
+<?php
+include '../lib/conn.php';
+$sp=$_POST['sp'];
+$old_password=$_POST['old_password'];
+$new_password=$_POST['new_password'];
+$user_id=$_POST['user_id'];
+$sql="CALL ".$sp."('".$old_password."','".$new_password."','".$user_id."');";
+$res=$conn->query($sql);
+if($res)
+{
+	$row=$res->fetch_array();
+	$msg=explode("|", $row[0]);
+	if ($msg[0] == "success") {
+	?>
+		<script>
+	        $("#sys_form_change").each(function(){
+				this.reset();
+				$(".password_check").text(" ");
+			});
+        </script>
+	<?php
+	}
+?>
+<div class="alert alert-<?php echo $msg[0];?> fade show alert-dismissible">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><i class="icon fas fa-<?php if($msg[0] == "success"){ echo "check";} else{ echo "ban";}?>"></i> Message
+    </h5>
+        <?php echo $msg[1];?>
+</div>
+<?php
+}
+?>
