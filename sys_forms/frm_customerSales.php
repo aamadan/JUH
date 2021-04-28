@@ -2,7 +2,7 @@
 include("../lib/conn.php");
 ?>
             <!-- form start -->
-            <form role="form" action="actions/insert_sales.php" method="POST" enctype="multipart/form-data" id="sys_form_sales">
+            <form role="form" action="actions/test2.php" method="POST" enctype="multipart/form-data" id="sys_form_customerSales">
               <div class="card card-primary card-outline" id="invoice_info">
                 <input type="hidden" name="sp" value="sp_supplier" id="sp_purchase">
                 <div class="card-body">
@@ -10,7 +10,7 @@ include("../lib/conn.php");
                   <hr>
                   <input type="hidden" value="exists" id="checkSales">
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for="invoice_no">Invoice Number</label>
                         <?php
@@ -21,27 +21,10 @@ include("../lib/conn.php");
                         <input type="text" name="invoice_no" id="invoice_no" class="form-control" placeholder="Enter Invoice Number" value="<?php echo $row['value']+1?>" required readonly>
                       </div>
                     </div>
-                    <div class="col-md-4" id="sales">
-                      <div class="form-group">
-                        <label>Select Sales Type</label>
-                        <select class="form-control select2" style="width: 100%;" name="sales_type" id="sales_type" required>
-                          <option selected="selected" value="">Select Sales Type</option>
-                          <option value="customer">Customer Sales</option>
-                          <option value="cash">Cash Sales</option>
-                          <option value="prescription">Prescription Sales</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-4 cash_input d-none">
-                      <div class="form-group">
-                        <label>Enter Customer Name</label>
-                        <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Enter Customer Name">
-                      </div>
-                    </div>
-                    <div class="col-md-4 customer_input d-none">
+                    <div class="col-md-4">
                       <div class="form-group">
                         <label>Select Customer</label>
-                        <select class="form-control select2" style="width: 100%;" name="customer" id="customer">
+                        <select class="form-control select2" style="width: 100%;" name="customer" id="customer" required>
                           <option value="">Select Customer</option>
                           <?php
                           include '../lib/conn.php';
@@ -56,14 +39,16 @@ include("../lib/conn.php");
                         </select>
                       </div>
                     </div>
-                    <div class="col-md-4 prescription_input d-none">
+                    <div class="col-md-2">
                       <div class="form-group">
-                        <label>Enter Prescription No</label>
-                        <input type="text" class="form-control number" name="prescription_number" id="prescription_number" placeholder="Enter Prescription Number">
+                        <label>Current Balance</label>
+                        <input type="text" class="form-control" readonly placeholder="Current Balance" id="current_balance">
                       </div>
-                    </div>  
-                    <input type="hidden" id="current_balance">
-                    <input type="hidden" id="max_balance">                                                  
+                    </div>
+                    <div class="col-md-3">
+                      <label>Maximum Allowed Balance</label>
+                      <input type="text" class="form-control" readonly placeholder="Maximum Allowed Balance"id="max_balance">
+                    </div>                                                  
                   </div>
                   <div class="row">
                     <div class="col-md-10"></div>
@@ -73,50 +58,11 @@ include("../lib/conn.php");
                   </div>
                 </div>
               </div>
-              <div class="card card-primary card-outline" >
-                <div class="card-body">
-                  <h3 class="mt-4 d-inline">Payment Information</h3>
-                  <hr>
-                  <div class="row mb-3 py-1">                          
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="sales_total">Total</label>
-                        <input type="text" name="sales_total" id="sales_total" class="form-control" readonly required>
-                      </div>
-                    </div>                         
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="sales_discount">Discount</label>
-                        <input type="text" name="sales_discount" id="sales_discount" class="form-control number" value="0">
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="form-group">
-                        <label for="sales_grand_total">Grand Total</label>
-                        <input type="text" name="sales_grand_total" id="sales_grand_total" class="form-control" readonly>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="form-group">
-                        <label for="sales_paid">Paid</label>
-                        <input type="text" name="sales_paid" id="sales_paid" class="form-control number" value="0">
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="form-group">
-                        <label for="sales_rest">Rest</label>
-                        <input type="text" name="sales_rest" id="sales_rest" class="form-control" readonly>
-                      </div>
-                    </div>  
-                    <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">              
-                  </div>
-                </div>
-              </div>
               <div class="card card-primary card-outline" id="sales_info">
                 <div class="card-body">
                   <div class="row">                    
                     <div class="col-md-12">                      
-                      <h3 class="mt-4 d-inline">sales Information</h3>
+                      <h3 class="mt-4 d-inline">Sales Information</h3>
                       <div class="float-right bg-primary">
                         <button type="button" class="btn btn-flat btn-primary text-center" id="sales_addRow"><span class="fas fa-plus mr-3" ></span> Add New Row</button>
                       </div>    
@@ -135,7 +81,7 @@ include("../lib/conn.php");
                             </tr>
                           </thead>
                           <tbody>
-                            <tr >
+                            <tr>
                               <td width="7%">1</td>
                               <td width="30%">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product1">
@@ -330,13 +276,15 @@ include("../lib/conn.php");
                       </div>                     
                     </div>
                   </div>
+                </div>
+                <div class="card-footer">
                   <div class="row">
                     <div class="col-6"></div>
                     <div class="col-3">
                       <button type="reset" class="btn btn-danger btn-block float-right sys-cancel" >Cancel</button>
                     </div>
                     <div class="col-3">
-                      <button type="submit" class="btn btn-block float-right btn-success">Submit</button>
+                      <button type="button" class="btn btn-block float-right btn-success" id="sales_checkout"><i class="fas fa-shopping-cart"></i> Check Out</button>
                     </div>
                   </div>
                 </div>
@@ -348,16 +296,49 @@ include("../lib/conn.php");
                     <div  class="modal-dialog modal-dialog-centered modal-lg" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h4 class="modal-title">Product Registration</h4>
+                          <h4 class="modal-title">Payment Information</h4>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" class="text-light">&times;</span>
+                            <span aria-hidden="true" class="text-dark">&times;</span>
                           </button>
                         </div>
                         <div class="modal-body" id="sys-modal-body">
-                                  
+                          <div class="row">                          
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <label for="total">Total</label>
+                                <input type="text" name="total" id="total" class="form-control" readonly required>
+                              </div>
+                            </div>                         
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <label for="discount">Discount</label>
+                                <input type="text" name="discount" id="discount" class="form-control number" value="0">
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label for="grand_total">Grand Total</label>
+                                <input type="text" name="grand_total" id="grand_total" class="form-control" readonly>
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label for="paid">Paid</label>
+                                <input type="text" name="paid" id="paid" class="form-control number" value="0">
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label for="rest">Rest</label>
+                                <input type="text" name="rest" id="rest" class="form-control" readonly>
+                              </div>
+                            </div>  
+                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">
+                          </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-success btn-flat">Submit</button>
                         </div>
                       </div>
                     <!-- /.modal-content -->

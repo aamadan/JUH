@@ -254,32 +254,32 @@ include("../lib/conn.php");
                           <div class="row">
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label for="purchase_total">Total</label>
-                                <input type="text" name="purchase_total" id="purchase_total" class="form-control" readonly required>
+                                <label for="total">Total</label>
+                                <input type="text" name="total" id="total" class="form-control" readonly required>
                               </div>
                             </div>                         
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label for="purchase_discount">Discount</label>
-                                <input type="text" name="purchase_discount" id="purchase_discount" class="form-control number" value="0">
+                                <label for="discount">Discount</label>
+                                <input type="text" name="discount" id="discount" class="form-control number" value="0">
                               </div>
                             </div>
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label for="purchase_grand_total">Grand Total</label>
-                                <input type="text" name="purchase_grand_total" id="purchase_grand_total" class="form-control" readonly>
+                                <label for="grand_total">Grand Total</label>
+                                <input type="text" name="grand_total" id="grand_total" class="form-control" readonly>
                               </div>
                             </div>
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label for="purchase_paid">Paid</label>
-                                <input type="text" name="purchase_paid" id="purchase_paid" class="form-control number" value="0">
+                                <label for="paid">Paid</label>
+                                <input type="text" name="paid" id="paid" class="form-control number" value="0">
                               </div>
                             </div>
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label for="purchase_rest">Rest</label>
-                                <input type="text" name="purchase_rest" id="purchase_rest" class="form-control" readonly>
+                                <label for="rest">Rest</label>
+                                <input type="text" name="rest" id="rest" class="form-control" readonly>
                               </div>
                             </div>  
                             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">                          
@@ -310,7 +310,7 @@ include("../lib/conn.php");
             <div class="container-fluid">
               <div class="row">
                 <div class="col-12" id="sys-message"></div>
-                <div class="modal fade" id="sys-modal">
+                <div class="modal fade mx-0 my-0 px-0 py-0" id="sys-modal">
                   <div  class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -319,7 +319,7 @@ include("../lib/conn.php");
                           <span aria-hidden="true" class="text-light">&times;</span>
                         </button>
                       </div>
-                      <div class="modal-body" id="sys-modal-body">
+                      <div class="modal-body mx-0 my-0 px-0 py-0" id="sys-modal-body">
                                 
                       </div>
                       <div class="modal-footer">

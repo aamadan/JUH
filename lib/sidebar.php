@@ -213,6 +213,24 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="sys_forms/frm_customerSales.php" class="nav-link sys-forms">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Customert Sales</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="sys_forms/frm_cashSales.php" class="nav-link sys-forms">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cash Sales</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="sys_forms/frm_prescriptionSales.php" class="nav-link sys-forms">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Prescription Sales</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="sys_forms/frm_addLabTest.php" class="nav-link sys-forms">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sales Return</p>

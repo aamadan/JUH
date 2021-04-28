@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	//frm_prouct_purchase.php
+	//form submits
+	//frm_prouct_purchase.php submit
 	$("body").on("submit","#sys_form_purchase",function(e){
 		e.preventDefault();
 		var url=$(this).attr("action");
@@ -34,6 +35,165 @@ $(document).ready(function(){
 			toastr.error("Please fill purchase form");
 		}
 	});
+	//frm cash sales submit
+	$("body").on("submit","#sys_form_cashSales",function(e){
+		e.preventDefault();
+		var url=$(this).attr("action");
+		var data=new FormData(this);
+		var sales_valid=0;
+		var checked=0;
+		if ($("#rest").val() > 0) {
+			toastr.error("Cash sales must be paid fully")
+		}						
+		else{
+			checked=1;
+		}
+		if(checked ==1){
+			$(".sales_product").each(function(){
+				if ($(this).val()) {
+					data.append("sales_product[]",$(this).val());
+					data.append("sales_unit[]",$(this).parent().parent().find(".sales_unit").val());
+					data.append("sales_quantity[]",$(this).parent().parent().find(".qty").val());
+					data.append("sales_price[]",$(this).parent().parent().find(".price").val());
+					sales_valid=1;
+				}
+			});	
+			if (sales_valid ==1) {
+				$.ajax({
+					url:url,
+					data:data,
+					method:"POST",
+					processData:false,
+					contentType:false,
+					success:function(data){
+						$("#sys-message").append(data);
+						setTimeout(function(){
+							$(".alert").remove();
+						},5000);
+					}
+				});
+			}
+			else{
+				toastr.error("Please fill sales form");
+			}
+		}
+	});
+	//frm customer sales submit
+	$("body").on("submit","#sys_form_customerSales",function(e){
+		e.preventDefault();
+		var url=$(this).attr("action");
+		var data=new FormData(this);
+		var sales_valid=0;
+		var checked=0;
+		var balance=Number($("#current_balance").val());
+		var rest=Number($("#rest").val());
+		var max_balance=Number($("#max_balance").val());
+		var current_balance=balance+rest;
+		if(balance+rest > max_balance){
+			Swal.fire({
+				title: 'Customer balance',
+				text: "Customer is exeeding maximum allowed balance are you sure to continue?",
+				icon: 'question',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				customClass: 'swal-wide',
+				confirmButtonText: 'OK',
+				allowOutsideClick: false,
+				allowEscapeKey: false
+			}).then((result) => {
+				if (result.value) {
+					checked=1;
+					submit();
+				}
+			});
+		}
+		submit();
+		function submit(){
+			alert("submitting");
+			if(checked ==1){
+				alert("done");
+				$(".sales_product").each(function(){
+					if ($(this).val()) {
+						data.append("sales_product[]",$(this).val());
+						data.append("sales_unit[]",$(this).parent().parent().find(".sales_unit").val());
+						data.append("sales_quantity[]",$(this).parent().parent().find(".qty").val());
+						data.append("sales_price[]",$(this).parent().parent().find(".price").val());
+						sales_valid=1;
+					}
+				});	
+				if (sales_valid ==1) {
+					$.ajax({
+						url:url,
+						data:data,
+						method:"POST",
+						processData:false,
+						contentType:false,
+						success:function(data){
+							$("#sys-message").append(data);
+							setTimeout(function(){
+								$(".alert").remove();
+							},5000);
+						}
+					});
+				}
+				else{
+					toastr.error("Please fill sales form");
+				}
+			}
+			else{
+				alert("problem");
+			}
+		}
+	});
+	//frm_prescription_sales submit
+	$("body").on("submit","#sys_form_prescriptionSales",function(e){
+		e.preventDefault();
+		var url=$(this).attr("action");
+		var data=new FormData(this);
+		for (var pair of data.entries()) {
+		    console.log(pair[0]+ ', ' + pair[1]); 
+		}
+		var sales_valid=0;
+		var checked=0;
+		if ($("#rest").val() > 0) {
+			toastr.error("Prescription sales must be paid fully")
+		}						
+		else{
+			checked=1;
+		}
+		if(checked ==1){
+			$(".prescription_check").each(function(){
+				if ($(this).is(":checked")) {
+					data.append("sales_product[]",$(this).parent().parent().parent().parent().find(".product_id").val());
+					data.append("sales_unit[]"," ");
+					data.append("sales_quantity[]",$(this).parent().parent().parent().parent().find(".qty").val());
+					data.append("sales_price[]",$(this).parent().parent().parent().parent().find(".price").val());
+					sales_valid=1;
+				}
+			})	
+			if (sales_valid ==1) {
+				$.ajax({
+					url:url,
+					data:data,
+					method:"POST",
+					processData:false,
+					contentType:false,
+					success:function(data){
+						$("#sys-message").append(data);
+						setTimeout(function(){
+							$(".alert").remove();
+						},5000);
+					}
+				});
+				$("#prescription_info").remove();
+			}
+			else{
+				toastr.error("Please fill sales form");
+			}
+		}
+	});
+	//frm_product_purchase
 	$("body").on("change",".purchase_product",function(){
 		if ($(this).val() == "") {
 			$(this).parent().parent().find(".price").val("");
@@ -69,145 +229,6 @@ $(document).ready(function(){
 	    	$(this).parent().parent().find(".purchase_unit").attr("required","true");
 		}    	                
     });
-    $("body").on("blur",".qty",function(e){
-        var quantity_val=parseFloat($(this).val());
-        if (!isNaN(quantity_val)) {
-            if ($(this).parent().parent().find(".price").val() != "" ) {
-                var price_val=parseFloat($(this).parent().parent().find(".price").val());
-                var amount_val=price_val*quantity_val;
-                $(this).parent().parent().find(".amount").val(amount_val.toFixed(4));
-                $(this).parent().parent().find(".amount").trigger("change");
-            }
-        }
-        else{
-            $(this).parent().parent().find(".amount").val("");
-        }  
-    });
-    $("body").on("blur",".price",function(e){
-        var price_val=parseFloat($(this).val());
-        if (!isNaN(price_val)) {
-            if ($(this).parent().parent().find(".qty").val() != "") {
-                var quantity_val=parseFloat($(this).parent().parent().find(".qty").val());
-                var amount_val=price_val*quantity_val;
-                $(this).parent().parent().find(".amount").val(amount_val.toFixed(4));
-                $(this).parent().parent().find(".amount").trigger("change");
-            }
-        }
-        else{
-            $(this).parent().parent().find(".amount").val("");
-        }                  
-    });
-    $("body").on("change",".amount",function(){
-    	var total=0.0;
-    	$(".amount").each(function(){
-    		if($(this).val() != ""){
-    			total=parseFloat(total)+parseFloat($(this).val());
-    		}
-    	});
-    	$("#purchase_total").val(total);
-    	if ($("#purchase_discount").val()) {
-    		var purchase_discount=parseFloat($("#purchase_discount").val());
-    		var purchase_total=parseFloat($("#purchase_total").val());
-    		var grand_total=purchase_total - purchase_discount;
-    		$("#purchase_grand_total").val(grand_total);
-    		$("#purchase_rest").val(grand_total);
-    	}
-    	else{
-    		$("#purchase_grand_total").val($("#purchase_total").val());
-    		$("#purchase_rest").val($("#purchase_total").val());
-    	}
-    });
-
-    // $("body").on("keydown","#purchase_discount",function(e){
-    // 	e.preventDefault();
-    // })
-
-    $("body").on("change","#purchase_discount",function(){
-    	if ($("#purchase_total").val()) {
-    		if ($(this).val()) {
-	    		var purchase_discount=parseFloat($(this).val());
-	    		var purchase_total=parseFloat($("#purchase_total").val());
-	    		var grand_total=purchase_total - purchase_discount;
-	    		$("#purchase_grand_total").val(grand_total);
-	    		if ($("#purchase_paid").val()) {
-		    		var purchase_paid=parseFloat($("#purchase_paid").val());
-		    		var grand_total=parseFloat($("#purchase_grand_total").val());
-		    		var rest=grand_total - purchase_paid;
-		    		$("#purchase_rest").val(rest);
-	    		}
-		    	else{
-		    		$("#purchase_rest").val($("#purchase_grand_total").val());
-		    	}
-    		}
-    		else if($("#purchase_paid").val() && $(this).val() == ""){
-    			$("#purchase_grand_total").val($("#purchase_total").val());
-    			var purchase_paid=parseFloat($("#purchase_paid").val());
-		    	var grand_total=parseFloat($("#purchase_grand_total").val());
-		    	var rest=grand_total - purchase_paid;
-		    	$("#purchase_rest").val(rest);
-    		}
-	    	else if($(this).val() == ""){
-	    		$("#purchase_grand_total").val($("#purchase_total").val());
-	    		$("#purchase_rest").val($("#purchase_total").val());
-	    	}
-    	}    	
-    });
-    $("body").on("keyup","#purchase_discount",function(){
-    	if ($("#purchase_total").val()) {
-    		if ($(this).val()) {
-	    		var purchase_discount=parseFloat($(this).val());
-	    		var purchase_total=parseFloat($("#purchase_total").val());
-	    		var grand_total=purchase_total - purchase_discount;
-	    		$("#purchase_grand_total").val(grand_total);
-	    		if ($("#purchase_paid").val()) {
-		    		var purchase_paid=parseFloat($("#purchase_paid").val());
-		    		var grand_total=parseFloat($("#purchase_grand_total").val());
-		    		var rest=grand_total - purchase_paid;
-		    		$("#purchase_rest").val(rest);
-	    		}
-		    	else{
-		    		$("#purchase_rest").val($("#purchase_grand_total").val());
-		    	}
-    		}
-    		else if($("#purchase_paid").val()){
-    			$("#purchase_grand_total").val($("#purchase_total").val());
-    			var purchase_paid=parseFloat($("#purchase_paid").val());
-		    	var grand_total=parseFloat($("#purchase_grand_total").val());
-		    	var rest=grand_total - purchase_paid;
-		    	$("#purchase_rest").val(rest);
-    		}
-	    	else if($(this).val() == ""){
-	    		$("#purchase_grand_total").val($("#purchase_total").val());
-	    		$("#purchase_rest").val($("#purchase_total").val());
-	    	}
-    	}    	
-    });
-    $("body").on("change","#purchase_paid",function(){
-    	if ($("#purchase_grand_total").val()) {
-    		if ($(this).val()) {
-	    		var purchase_paid=parseFloat($(this).val());
-	    		var grand_total=parseFloat($("#purchase_grand_total").val());
-	    		var rest=grand_total - purchase_paid;
-	    		$("#purchase_rest").val(rest);
-    		}
-	    	else{
-	    		$("#purchase_rest").val($("#purchase_grand_total").val());
-	    	}
-    	}    	
-    });
-    $("body").on("keyup","#purchase_paid",function(){
-    	if ($("#purchase_grand_total").val()) {
-    		if ($(this).val()) {
-	    		var purchase_paid=parseFloat($(this).val());
-	    		var grand_total=parseFloat($("#purchase_grand_total").val());
-	    		var rest=grand_total - purchase_paid;
-	    		$("#purchase_rest").val(rest);
-    		}
-	    	else{
-	    		$("#purchase_rest").val($("#purchase_grand_total").val());
-	    	}
-    	} 	
-    });
     $("body").on("click","#purchase_addRow",function(){
     	var obj=$(this);
     	$(this).attr("disabled","true");
@@ -241,8 +262,10 @@ $(document).ready(function(){
     		$("#sys-modal-body").html(data);
     	})
     });
-	
 	//frm sales
+	$("body").on("click","#sales_checkout",function(){
+		$("#sys-modal").modal("show");
+	});
     $("body").on("change","#sales_type",function(){
     	$(".prescription_input").addClass("d-none");
     	$(".cash_input").addClass("d-none");
@@ -302,11 +325,11 @@ $(document).ready(function(){
 		var sales_valid=0;
 		var checked=0;
 		if ($("#sales_type").val()=="cash") {
-			if($("#customer_name").val() =="" || $("#sales_rest").val() > 0){
+			if($("#customer_name").val() =="" || $("#rest").val() > 0){
 				if($("#customer_name").val() ==""){
 					toastr.error("Please fill customer name");		
 				}
-				else if ($("#sales_rest").val() > 0) {
+				else if ($("#rest").val() > 0) {
 					toastr.error("Cash sales must be paid fully")
 				}						
 			}
@@ -316,7 +339,7 @@ $(document).ready(function(){
 		}
 		else if ($("#sales_type").val()=="customer"){
 			var balance=Number($("#current_balance").val());
-			var rest=Number($("#sales_rest").val());
+			var rest=Number($("#rest").val());
 			var max_balance=Number($("#max_balance").val());
 			var current_balance=balance+rest;
 			alert(balance)
@@ -376,7 +399,7 @@ $(document).ready(function(){
 		}
 		else{
 			if ($("#checkSales").val() =="removed") {
-				if ($("#sales_rest").val() > 0) {
+				if ($("#rest").val() > 0) {
 					toastr.error("No rest is allowed please");
 				}
 				else{
@@ -465,56 +488,7 @@ $(document).ready(function(){
 	    	$(this).parent().parent().find(".sales_unit").attr("required","true");
 		}    	                
     });
-    $("body").on("blur",".qty",function(e){
-        var quantity_val=parseFloat($(this).val());
-        if (!isNaN(quantity_val)) {
-            if ($(this).parent().parent().find(".price").val() != "" ) {
-                var price_val=parseFloat($(this).parent().parent().find(".price").val());
-                var amount_val=price_val*quantity_val;
-                $(this).parent().parent().find(".amount").val(amount_val.toFixed(4));
-                $(this).parent().parent().find(".amount").trigger("change");
-            }
-        }
-        else{
-            $(this).parent().parent().find(".amount").val("");
-        }  
-    });
-    $("body").on("blur",".price",function(e){
-        var price_val=parseFloat($(this).val());
-        if (!isNaN(price_val)) {
-            if ($(this).parent().parent().find(".qty").val() != "") {
-                var quantity_val=parseFloat($(this).parent().parent().find(".qty").val());
-                var amount_val=price_val*quantity_val;
-                $(this).parent().parent().find(".amount").val(amount_val.toFixed(4));
-                $(this).parent().parent().find(".amount").trigger("change");
-            }
-        }
-        else{
-            $(this).parent().parent().find(".amount").val("");
-        }                  
-    });
-    $("body").on("change",".amount",function(){
-    	var total=0.0;
-    	$(".amount").each(function(){
-    		if($(this).val() != ""){
-    			total=parseFloat(total)+parseFloat($(this).val());
-    		}
-    	});
-    	$("#sales_total").val(total);
-    	if ($("#sales_discount").val()) {
-    		var sales_discount=parseFloat($("#sales_discount").val());
-    		var sales_total=parseFloat($("#sales_total").val());
-    		var grand_total=sales_total - sales_discount;
-    		$("#sales_grand_total").val(grand_total);
-    		$("#sales_rest").val(grand_total);
-    	}
-    	else{
-    		$("#sales_grand_total").val($("#sales_total").val());
-    		$("#sales_rest").val($("#sales_total").val());
-    	}
-    });
-
-    // $("body").on("keydown","#purchase_discount",function(e){
+    // $("body").on("keydown","#discount",function(e){
     // 	e.preventDefault();
     // })
     $("body").on("keypress",".sales_qty",function(e){
@@ -537,92 +511,6 @@ $(document).ready(function(){
 	    		e.preventDefault();
 	    	}
     	}
-    });
-    $("body").on("change","#sales_discount",function(){
-    	if ($("#sales_total").val()) {
-    		if ($(this).val()) {
-	    		var sales_discount=parseFloat($(this).val());
-	    		var sales_total=parseFloat($("#sales_total").val());
-	    		var grand_total=sales_total - sales_discount;
-	    		$("#sales_grand_total").val(grand_total);
-	    		if ($("#sales_paid").val()) {
-		    		var sales_paid=parseFloat($("#sales_paid").val());
-		    		var grand_total=parseFloat($("#sales_grand_total").val());
-		    		var rest=grand_total - sales_paid;
-		    		$("#sales_rest").val(rest);
-	    		}
-		    	else{
-		    		$("#sales_rest").val($("#sales_grand_total").val());
-		    	}
-    		}
-    		else if($("#sales_paid").val() && $(this).val() == ""){
-    			$("#sales_grand_total").val($("#sales_total").val());
-    			var sales_paid=parseFloat($("#sales_paid").val());
-		    	var grand_total=parseFloat($("#sales_grand_total").val());
-		    	var rest=grand_total - sales_paid;
-		    	$("#sales_rest").val(rest);
-    		}
-	    	else if($(this).val() == ""){
-	    		$("#sales_grand_total").val($("#sales_total").val());
-	    		$("#sales_rest").val($("#sales_total").val());
-	    	}
-    	}    	
-    });
-    $("body").on("keyup","#sales_discount",function(){
-    	if ($("#sales_total").val()) {
-    		if ($(this).val()) {
-	    		var sales_discount=parseFloat($(this).val());
-	    		var sales_total=parseFloat($("#sales_total").val());
-	    		var grand_total=sales_total - sales_discount;
-	    		$("#sales_grand_total").val(grand_total);
-	    		if ($("#sales_paid").val()) {
-		    		var sales_paid=parseFloat($("#sales_paid").val());
-		    		var grand_total=parseFloat($("#sales_grand_total").val());
-		    		var rest=grand_total - sales_paid;
-		    		$("#sales_rest").val(rest);
-	    		}
-		    	else{
-		    		$("#sales_rest").val($("#sales_grand_total").val());
-		    	}
-    		}
-    		else if($("#sales_paid").val()){
-    			$("#sales_grand_total").val($("#sales_total").val());
-    			var sales_paid=parseFloat($("#sales_paid").val());
-		    	var grand_total=parseFloat($("#sales_grand_total").val());
-		    	var rest=grand_total - sales_paid;
-		    	$("#sales_rest").val(rest);
-    		}
-	    	else if($(this).val() == ""){
-	    		$("#sales_grand_total").val($("#sales_total").val());
-	    		$("#sales_rest").val($("#sales_total").val());
-	    	}
-    	}    	
-    });
-    $("body").on("change","#sales_paid",function(){
-    	if ($("#sales_grand_total").val()) {
-    		if ($(this).val()) {
-	    		var sales_paid=parseFloat($(this).val());
-	    		var grand_total=parseFloat($("#sales_grand_total").val());
-	    		var rest=grand_total - sales_paid;
-	    		$("#sales_rest").val(rest);
-    		}
-	    	else{
-	    		$("#sales_rest").val($("#sales_grand_total").val());
-	    	}
-    	}    	
-    });
-    $("body").on("keyup","#sales_paid",function(){
-    	if ($("#sales_grand_total").val()) {
-    		if ($(this).val()) {
-	    		var sales_paid=parseFloat($(this).val());
-	    		var grand_total=parseFloat($("#sales_grand_total").val());
-	    		var rest=grand_total - sales_paid;
-	    		$("#sales_rest").val(rest);
-    		}
-	    	else{
-	    		$("#sales_rest").val($("#sales_grand_total").val());
-	    	}
-    	} 	
     });
     $("body").on("click","#sales_addRow",function(){
     	var obj=$(this);
@@ -677,7 +565,7 @@ $(document).ready(function(){
     });
     $("body").on("click",".prescription_check",function(){
     	var amount=Number($(this).parent().parent().parent().parent().find(".amount").val());
-    	var total=Number($("#sales_total").val());
+    	var total=Number($("#total").val());
     	if($(this).is(":checked")){
 			$(this).prop( "checked", true );
 			total=total+amount;	
@@ -686,13 +574,13 @@ $(document).ready(function(){
 			$(this).prop( "checked", false );
 			total=total-amount;		
 		}
-		$("#sales_total").val(total);
-		$("#sales_discount").trigger("change");
+		$("#total").val(total);
+		$("#discount").trigger("change");
     });
     //frm_purchase_return
     $("body").on("change","#supplier",function(){
     	var val=$(this).val();
-    	var url="sys_res/purchase_supplier_invoice?supplier="+val;
+    	var url="sys_res/purchase_supplier_invoice.php?supplier="+val;
     	$.get(url,function(data){
     		$("#invoice").empty();
     		$("#invoice").append(data);
@@ -743,4 +631,183 @@ $(document).ready(function(){
     		}
     	})
     });
+
+
+    //Calculations
+    $("body").on("blur",".qty",function(e){
+        var quantity_val=parseFloat($(this).val());
+        if (!isNaN(quantity_val)) {
+            if ($(this).parent().parent().find(".price").val() != "" ) {
+                var price_val=parseFloat($(this).parent().parent().find(".price").val());
+                var amount_val=price_val*quantity_val;
+                $(this).parent().parent().find(".amount").val(amount_val.toFixed(4));
+                $(this).parent().parent().find(".amount").trigger("change");
+            }
+        }
+        else{
+            $(this).parent().parent().find(".amount").val("");
+        }  
+    });
+    $("body").on("blur",".price",function(e){
+        var price_val=parseFloat($(this).val());
+        if (!isNaN(price_val)) {
+            if ($(this).parent().parent().find(".qty").val() != "") {
+                var quantity_val=parseFloat($(this).parent().parent().find(".qty").val());
+                var amount_val=price_val*quantity_val;
+                $(this).parent().parent().find(".amount").val(amount_val.toFixed(4));
+                $(this).parent().parent().find(".amount").trigger("change");
+            }
+        }
+        else{
+            $(this).parent().parent().find(".amount").val("");
+        }                  
+    });
+    $("body").on("change",".amount",function(){
+    	var total=0.0;
+    	$(".amount").each(function(){
+    		if($(this).val() != ""){
+    			total=parseFloat(total)+parseFloat($(this).val());
+    		}
+    	});
+    	$("#total").val(total);
+    	if ($("#discount").val()) {
+    		var discount=parseFloat($("#discount").val());
+    		var total=parseFloat($("#total").val());
+    		var grand_total=total - discount;
+    		$("#grand_total").val(grand_total);
+    		$("#rest").val(grand_total);
+    	}
+    	else{
+    		$("#grand_total").val($("#total").val());
+    		$("#rest").val($("#total").val());
+    	}
+    });
+    $("body").on("change","#discount",function(){
+    	if ($("#total").val()) {
+    		if ($(this).val()) {
+	    		var discount=parseFloat($(this).val());
+	    		var total=parseFloat($("#total").val());
+	    		var grand_total=total - discount;
+	    		$("#grand_total").val(grand_total);
+	    		if ($("#paid").val()) {
+		    		var paid=parseFloat($("#paid").val());
+		    		var grand_total=parseFloat($("#grand_total").val());
+		    		var rest=grand_total - paid;
+		    		$("#rest").val(rest);
+	    		}
+		    	else{
+		    		$("#rest").val($("#grand_total").val());
+		    	}
+    		}
+    		else if($("#paid").val() && $(this).val() == ""){
+    			$("#grand_total").val($("#total").val());
+    			var paid=parseFloat($("#paid").val());
+		    	var grand_total=parseFloat($("#grand_total").val());
+		    	var rest=grand_total - paid;
+		    	$("#rest").val(rest);
+    		}
+	    	else if($(this).val() == ""){
+	    		$("#grand_total").val($("#total").val());
+	    		$("#rest").val($("#total").val());
+	    	}
+    	}    	
+    });
+    $("body").on("keyup","#discount",function(){
+    	if ($("#total").val()) {
+    		if ($(this).val()) {
+	    		var discount=parseFloat($(this).val());
+	    		var total=parseFloat($("#total").val());
+	    		var grand_total=total - discount;
+	    		$("#grand_total").val(grand_total);
+	    		if ($("#paid").val()) {
+		    		var paid=parseFloat($("#paid").val());
+		    		var grand_total=parseFloat($("#grand_total").val());
+		    		var rest=grand_total - paid;
+		    		$("#rest").val(rest);
+	    		}
+		    	else{
+		    		$("#rest").val($("#grand_total").val());
+		    	}
+    		}
+    		else if($("#paid").val()){
+    			$("#grand_total").val($("#total").val());
+    			var paid=parseFloat($("#paid").val());
+		    	var grand_total=parseFloat($("#grand_total").val());
+		    	var rest=grand_total - paid;
+		    	$("#rest").val(rest);
+    		}
+	    	else if($(this).val() == ""){
+	    		$("#grand_total").val($("#total").val());
+	    		$("#rest").val($("#total").val());
+	    	}
+    	}    	
+    });
+    $("body").on("keypress","#discount",function(e){
+    	if($(this).val().length == 0){
+    		if($("#total").val() == ""){
+    			toastr.success("Please fill the form before discount");
+    			e.preventDefault();
+    		}
+    		else{
+    			if(Number(e.key) > $("#total").val()){
+    			toastr.error("Discount money can not be exceeded the total");
+    			e.preventDefault();
+    			}
+    		}    		
+    	}
+    	else{
+    		var discount_money=Number($(this).val()+e.key);
+	    	if(discount_money > $("#total").val()){
+	    		toastr.error("Discount money can not be exceeded the total");
+	    		e.preventDefault();
+	    	}
+    	}	
+    })
+    $("body").on("change","#paid",function(){
+    	if ($("#grand_total").val()) {
+    		if ($(this).val()) {
+	    		var paid=parseFloat($(this).val());
+	    		var grand_total=parseFloat($("#grand_total").val());
+	    		var rest=grand_total - paid;
+	    		$("_rest").val(rest);
+    		}
+	    	else{
+	    		$("#rest").val($("#grand_total").val());
+	    	}
+    	}    	
+    });
+    $("body").on("keyup","#paid",function(){
+    	if ($("#grand_total").val()) {
+    		if ($(this).val()) {
+	    		var paid=parseFloat($(this).val());
+	    		var grand_total=parseFloat($("#grand_total").val());
+	    		var rest=grand_total - paid;
+	    		$("#rest").val(rest);
+    		}
+	    	else{
+	    		$("#rest").val($("#grand_total").val());
+	    	}
+    	} 	
+    });
+    $("body").on("keypress","#paid",function(e){
+    	if($(this).val().length == 0){
+    		if($("#grand_total").val() == ""){
+    			toastr.success("Please fill the form before payment");
+    			e.preventDefault();
+    		}
+    		else{
+    			if(Number(e.key) > $("#grand_total").val()){
+    			toastr.error("Paying money can not be exceeded the grand total");
+    			e.preventDefault();
+    			}
+    		}    		
+    	}
+    	else{
+    		var paying_money=Number($(this).val()+e.key);
+	    	if(paying_money > $("#grand_total").val()){
+	    		toastr.error("Paying money can not be exceeded the grand total");
+	    		e.preventDefault();
+	    	}
+    	}	
+    })
 });
