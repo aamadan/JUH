@@ -1,8 +1,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Jazeera University Hospital | System</title>
+  <title>Mahuran Polyclininc</title>
   <!-- logo icon -->
-  <link rel="shortcut icon" href="app_images/APP_LOGO.png" type="image/x-icon">
+  <link rel="shortcut icon" href="app_images/ma_logo.png" type="image/x-icon">
  <!-- bootstrap datepicker -->
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">

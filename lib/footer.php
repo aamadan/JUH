@@ -1,5 +1,5 @@
 <footer class="main-footer">
-    <strong>Jazeera University Hospital &copy; <?php echo date("Y") ?> <a href="https://jazeerauniversity.edu.so" target="_blank">Developed by Jazeera University ICT Department</a></strong>
+    
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0
     </div>
@@ -22,8 +22,8 @@
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- <script src="scripts/login.js?v=1.0"></script> -->
-<script src="scripts/pharmacy.js?v=1.5"></script>
-<script src="scripts/forms.js?v=2.30"></script>
+<script src="scripts/pharmacy.js?v=1.9"></script>
+<script src="scripts/forms.js?v=2.32"></script>
 <script src="scripts/validations.js?v=0.01"></script>
 <!-- ChartJS -->
 <script src="plugins/chart.js/Chart.min.js"></script>

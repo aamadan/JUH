@@ -13,6 +13,21 @@ $(document).ready(function () {
 			$("#content-body").html(data);
 		});
 	});
+	$("body").on("submit","#sys_form_search",function(e){
+		e.preventDefault();
+		var url=$(this).attr("action");
+		var data=new FormData(this);		
+		$.ajax({
+			url:url,
+			data:data,
+			method:"POST",
+			processData:false,
+			contentType:false,
+			success:function(data){
+				$("#report_section").html(data);
+			}
+		});
+	});
 	$("body").on("click",".close_patient_visit",function(e){
 		e.preventDefault();
 		e.preventDefault();
@@ -271,34 +286,7 @@ $(document).ready(function () {
 	//Ticket Button
 	$("body").on("click","#patient_exist",function(){
 		$("#sys-modal").modal("show");
-	})
-	//Drug categories
-	//Get extra inputs if the type is pill
-	$("body").on("change","#drug_category",function(){
-		var value=$(this).val();
-		if (value==1 || value==2 || value==5) {
-			var url="sys_res/stripes_category.html";
-			$(".inj_category").remove();
-			$(".pill_category").remove();
-			$.get(url,function(data){
-				$(".drugs_category").after(data);
-			});
-			$("#sp").val("sp_product_registration_pills");
-		}
-		else if (value==4) {
-			var url="sys_res/inj_category.html";
-			$(".pill_category").remove();
-			$.get(url,function(data){
-				$(".drugs_category").after(data);
-			});
-			$("#sp").val("sp_product_registration_inj");
-		}
-		else{
-			$(".pill_category").remove();
-			$(".inj_category").remove();
-			$("#sp").val("sp_product_registration");
-		}
-	});	
+	})	
     //frm_patient_visits
     $("body").on("submit","#sys_forms_filter_patient_visits",function(e){
     	e.preventDefault();
@@ -794,6 +782,44 @@ $("body").on("click","#add_diagnosis",function(){
     		toastr.error("Please fill required fields");
     	}
     });
+    //Permission
+    $("body").on("change",".check",function(){
+		var sidebr_id = $(this).val();
+		var user_id = $("#user-id").val();
+		var action = "";
+		var active_user=$("#user_id").val();
+		if ($(this).is(":checked")){
+			action = "1";
+		}else{
+			action = "2";
+		}
+		var data = "sp=sp_permission&sidebar="+sidebr_id+"&user="+user_id+"&action="+action+"&active="+active_user;
+		//alert(data);
+		$.post("actions/insert.php",data,function(res){
+		});
+	});
+    $("body").on("change",".menu",function(){
+		if($(this).is(":checked")){
+			$(this).parent().find(".check").each(function(){
+				if($(this).is(":checked")){
+
+				}
+				else{
+					$(this).trigger("click");
+				}
+			});
+		}
+		else{
+			$(this).parent().find(".check").each(function(){
+				if($(this).is(":checked")){
+					$(this).trigger("click");
+				}
+				else{
+					
+				}
+			});
+		}
+	});
 function fileValidation(fileClass) {
 	if(fileClass =="image"){
 		var file=$(".sys-file-pic");

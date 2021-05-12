@@ -493,36 +493,35 @@
                         </div>
                       </div>
                     </div>
- 
-					<div class="row">
-                      <div class="col-md-4">
+                    <div class="row">
+                      <div class="col-md-3">
                         <div class="form-group">
                           <label for="qty">Quantity</label>
                           <input type="text" name="qty" id="qty" class="form-control number" placeholder="Enter Quantity">
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                         <div class="form-group">
                           <label for="frequency">Frequency</label>
                           <input type="text" name="frequency" id="frequency" class="form-control frequency" placeholder="Enter Frequency">
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                         <div class="form-group">
                           <label for="duration">Duration</label>
                           <input type="text" name="duration" id="duration" class="form-control number" placeholder="Enter Duration">
                         </div>
                       </div>
-					 </div>
-					<div class="row"> 
-                      <div class="col-md-8">
+                      <div class="col-md-3">
                         <div class="form-group">
                           <label for="route">Route/Instruction</label>
-						  <textarea rows="1" class="form-control" name="route" id="route"></textarea>
+                          <input type="text" name="route" id="route" class="form-control number" placeholder="Enter Duration">
                         </div>
                       </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-8"></div>
                       <div class="col-md-4">
-                        <label style="visibility: hidden;">Add Drug</label>
                         <button type="button" class="btn btn-primary btn-flat btn-block" id="add_prescripted_list">Add Drug</button>
                       </div>
                     </div>

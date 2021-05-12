@@ -6,13 +6,28 @@
                 <input type="hidden" name="sp" value="sp_drug_category">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                       <div class="form-group">
                         <label for="category_name">Drug Category Name</label>
                         <input type="text" name="category_name" class="form-control" id="category_name" placeholder="Enter Drug Category name" required>
                       </div>
-                    </div>                     
-                  </div>
+                    </div>
+                    <div class="col-md-4">
+                    <!-- radio -->
+                      <label>Has Stripes</label>
+                      <div class="form-group clearfix">
+                        <div class="icheck-primary d-inline">
+                          <input type="radio" id="has_stripes_yes" name="has_stripes" value="1" required>
+                          <label for="has_stripes_yes">Yes
+                          </label>
+                        </div>
+                        <div class="icheck-primary d-inline ml-3">
+                          <input type="radio" id="has_stripes_no" name="has_stripes" value="0" required>
+                          <label for="has_stripes_no">No
+                          </label>
+                        </div>
+                      </div>                  
+                    </div>
                   <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">
                   <input type="hidden" name="id" id="id" value="0">
                 </div>              

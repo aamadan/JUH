@@ -1,7 +1,7 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
-    <div class="container">
+    <div class="container-fluid mx-5">
       <a href="#" class="navbar-brand">
-        <img src="app_images/banner.png"  alt="AdminLTE Logo" class="brand-image">
+        <img src="app_images/mahuran.png"  alt="AdminLTE Logo" width="200">
       </a>
       
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,10 +14,38 @@
           <li class="nav-item">
             <a href="index.php" class="nav-link">Home</a>
           </li>
-          <li class="nav-item">
-            <a href="sys_forms/frm_patientVisits.php" class="nav-link sys-forms">Clinical Management</a>
+          <?php
+            include 'lib/conn.php';          
+            $menusql="SELECT m.name, m.icon FROM menu m INNER join sidebar s ON s.menu_id=m.id INNER JOIN permission p on s.id=p.sidebar_id where p.user ='$_SESSION[user_id]' group by m.name ORDER BY m.id ";
+            $menures=$conn->query($menusql);
+            while ($menurow=$menures->fetch_assoc()) {
+          ?>
+          <li class="nav-item dropdown">
+            <a id="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+              <?php echo $menurow['name']?>
+            </a>
+            <ul aria-labelledby="" class="dropdown-menu border-0 shadow">
+              <?php
+                $submenusql="SELECT s.text, s.href FROM menu m INNER join sidebar s ON s.menu_id=m.id INNER JOIN permission p on s.id=p.sidebar_id where p.user ='$_SESSION[user_id]' and m.name = '$menurow[name]' ORDER BY s.id";
+                $submenures=$conn->query($submenusql);
+                if (!$submenures) {
+                  echo $conn->error;
+                }
+                while ($submenurow=$submenures->fetch_assoc()) {
+              ?>
+              <li>
+                <a href="<?php echo $submenurow['href']?>" class="dropdown-item sys-forms">
+                    <?php echo $submenurow['text']?>    
+                </a>
+              </li>
+            <?php
+              }
+            ?>
+            </ul>
           </li>
-         
+          <?php
+            }
+          ?>
         </ul>
       </div>
 

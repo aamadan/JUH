@@ -3,6 +3,9 @@ session_start();
 include '../lib/conn.php';
 $sql="CALL prescription_sales_info('$_GET[p_serial]')";
 $res=$conn->query($sql);
+if (!$res) {
+	echo $conn->error;
+}
 $i=1;
 ?>
 <div class="card card-primary card-outline" id="prescription_info">
@@ -53,15 +56,12 @@ $i=1;
 									</td>
 									<td width="10%">
 										<?php
-											if ($row["category"]==1 || $row["category"]==2 || $row["category"]==5) {
-												$price=$row["sell_price"]/($row["num_strp_per_pack"] * $row["num_pills_per_pack"]);
-											}
-											else if ($row["category"]==4) {
-								 				$price=$row["sell_price"]/$row["num_inj_per_pack"];
-											}
-											else if($row["category"]==3){
-												$price=$row["sell_price"];
-											}
+										if ($row["has_stripes"]==1) {
+											$price=$row["sell_price"]/($row["num_strp_per_pack"] * $row["num_pieces_per_str"]);
+										}
+										else{
+											$price=$row["sell_price"];
+										}
 										?>
 										<input type="text" class="form-control price number" name="sales_price" readonly value="<?php echo $price?>">
 									</td>

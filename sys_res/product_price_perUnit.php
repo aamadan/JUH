@@ -1,6 +1,6 @@
 <?php
 include ("../lib/conn.php");
-$sql="SELECT category,num_pills_per_pack,num_inj_per_pack,num_strp_per_pack,purchase_cost FROM product_info WHERE id='$_GET[id]'";
+$sql="SELECT category,num_pieces_per_str,num_inj_per_pack,num_strp_per_pack,purchase_cost FROM product_info WHERE id='$_GET[id]'";
 $res=$conn->query($sql);
 $row=$res->fetch_assoc();
 if($_GET["type"] == "stripe"){	
@@ -12,7 +12,7 @@ elseif ($_GET["type"] == "item") {
 		$product_price=$row["purchase_cost"]/$row["num_inj_per_pack"];
 	}
 	else{
-		$product_price=$row["purchase_cost"]/($row["num_strp_per_pack"]*$row["num_pills_per_pack"]);
+		$product_price=$row["purchase_cost"]/($row["num_strp_per_pack"]*$row["num_pieces_per_str"]);
 	}
 	echo $product_price;
 }

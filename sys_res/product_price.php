@@ -1,28 +1,21 @@
 <?php
 include("../lib/conn.php");
-$sql="SELECT p.purchase_cost,p.category FROM product_info p WHERE p.id='$_GET[id]'";
+$sql="SELECT p.purchase_cost,p.category,d.has_stripes,d.option_name FROM product_info p INNER JOIN drug_category d on d.id=p.category  WHERE p.id='$_GET[id]'";
 $res=$conn->query($sql);
 $row=$res->fetch_assoc();
 $data["price"]=$row["purchase_cost"];
-if ($row["category"] ==1 || $row["category"] ==2 || $row["category"] ==5) {
+if ($row["has_stripes"]==1) {
 	$data["options"]="
-		<option value=''>Select Purchase Unit</option>
+		<option value=''>Select Sales Unit</option>
 		<option value='box'>Box</option>
 		<option value='stripe'>Stripe</option>
-		<option value='item'>Item</option>
-	";
+		<option value='item'>Piece</option>";
+	
 }
-elseif ($row["category"] ==4) {
+else{
 	$data["options"]="
-		<option value=''>Select Purchase Unit</option>
-		<option value='box'>Box</option>
-		<option value='item'>Item</option>
-	";
-}
-elseif ($row["category"] ==3) {
-	$data["options"]="
-		<option value=''>Select Purchase Unit</option>
-		<option value='bottle'>Bottle</option>
+		<option value=''>Select Sales Unit</option>
+		<option value='".$row["option_name"]."'>".$row["option_name"]."</option>
 	";
 }
 echo json_encode($data);

@@ -101,9 +101,10 @@
     <table width="100%;" id="image">
         <thead>
             <tr>
-                <th align="left" width="100%" colspan="6"><img src="../app_images/banner.png" width="100%;"></th>
+                <th align="left" width="60%"><img src="../app_images/header_logo.png" width="70%;"></th>
+                <th align="right" width="60%"><img src="../app_images/header_numbers.png" width="70%;"></th>
             </tr>
-            <tr>
+            <!-- <tr>
                 <th width="10%" rowspan="2" class="header_icon_holder"><i class="fas fa-phone header_icon"></i></th>
                 <th width="20%" align="left" class="header_info">+252618796358</th>
                 <th width="10%" rowspan="2" class="header_icon_holder"><i class="fas fa-envelope header_icon"></i></th>
@@ -115,7 +116,7 @@
                 <th width="20%" align="left" class="header_info">+252618796358</th>
                 <th width="25%" align="left" class="header_info">aamadan2@gmail.com</th>
                 <th width="25%" align="left" class="header_info">Mogadishu - Somalia</th>
-            </tr>
+            </tr> -->
         </thead>
     </table>
     <?php

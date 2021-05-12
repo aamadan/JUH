@@ -7,7 +7,7 @@
       </li>
     </ul>
     <a href="index.php" class="navbar-brand">
-      <img src="app_images/banner.png" alt="JUH Logo" width="200" class="brand-image">
+      <img src="app_images/mahuran.png" alt="JUH Logo" width="200" class="brand-image">
     </a>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">    

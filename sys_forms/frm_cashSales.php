@@ -2,13 +2,12 @@
 include("../lib/conn.php");
 ?>
             <!-- form start -->
-            <form role="form" action="actions/test.php" method="POST" enctype="multipart/form-data" id="sys_form_cashSales">
+            <form role="form" action="actions/test2.php" method="POST" enctype="multipart/form-data" id="sys_form_cashSales">
               <div class="card card-primary card-outline" id="invoice_info">
                 <input type="hidden" name="sp" value="sp_supplier" id="sp_purchase">
                 <div class="card-body">
                   <h3>Invoice Information</h3>
                   <hr>
-                  <input type="hidden" value="exists" id="checkSales">
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
@@ -27,12 +26,6 @@ include("../lib/conn.php");
                         <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Enter Customer Name">
                       </div>
                     </div>                                                  
-                  </div>
-                  <div class="row">
-                    <div class="col-md-10"></div>
-                    <div class="col-md-2">
-                      <button type="button" class="btn btn-flat btn-primary btn-block d-none" id="prescription_search_sales"><i class="fas fa-shopping-cart"></i> Proceed</button>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -62,6 +55,7 @@ include("../lib/conn.php");
                             <tr>
                               <td width="7%">1</td>
                               <td width="30%">
+                                <input type="hidden" class="id" value="0">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product1">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
@@ -100,6 +94,7 @@ include("../lib/conn.php");
                             <tr >
                               <td width="7%">2</td>
                               <td width="30%">
+                                <input type="hidden" class="id" value="0">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product2">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
@@ -138,6 +133,7 @@ include("../lib/conn.php");
                             <tr >
                               <td width="7%">3</td>
                               <td width="30%">
+                                <input type="hidden" class="id" value="0">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product3">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
@@ -176,6 +172,7 @@ include("../lib/conn.php");
                             <tr >
                               <td width="7%">4</td>
                               <td width="30%">
+                                <input type="hidden" class="id" value="0">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product4">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
@@ -214,6 +211,7 @@ include("../lib/conn.php");
                             <tr >
                               <td width="7%">5</td>
                               <td width="30%">
+                                <input type="hidden" class="id" value="0">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product5">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php

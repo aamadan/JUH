@@ -9,6 +9,7 @@
                   <tr>
                     <th>S.NO</th>
                     <th>Category Name</th>
+                    <th>Has Stripes</th>
                     <th>Date</th>
                     <th style="text-align: center;">Update</th>
                   </tr>
@@ -24,6 +25,7 @@
                    <tr>
                     <td style="color: black;"><?php  echo $i?></td>
                     <td style="color: black;"><?php echo $row["Drug Category"]?></td>
+                    <td style="color: black;"><?php echo $row["Has Stripes"]?></td>
                     <td style="color: black;"><?php echo $row["Date"]?></td>
                     <td style="color: black;" align="center"><?php echo $row["Edit"]?></td>
                   </tr>

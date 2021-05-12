@@ -55,9 +55,13 @@ $(document).ready(function(){
 					data.append("sales_unit[]",$(this).parent().parent().find(".sales_unit").val());
 					data.append("sales_quantity[]",$(this).parent().parent().find(".qty").val());
 					data.append("sales_price[]",$(this).parent().parent().find(".price").val());
+					data.append("id[]",$(this).parent().parent().find(".id").val());
 					sales_valid=1;
 				}
 			});	
+			for (var pair of data.entries()) {
+		    	console.log(pair[0]+ ', ' + pair[1]); 
+			}
 			if (sales_valid ==1) {
 				$.ajax({
 					url:url,
@@ -191,6 +195,36 @@ $(document).ready(function(){
 			else{
 				toastr.error("Please fill sales form");
 			}
+		}
+	});
+	//-----------------------------------------------------------//
+	//frm_prdocut_registrations
+		//Drug categories
+	//Get extra inputs if the type is pill
+	$("body").on("change","#drug_category",function(){
+		alert("What");
+		var value=$(this).val();
+		if (value==1 || value==2 || value==5) {
+			var url="sys_res/stripes_category.html";
+			$(".inj_category").remove();
+			$(".pill_category").remove();
+			$.get(url,function(data){
+				$(".drugs_category").after(data);
+			});
+			$("#sp").val("sp_product_registration_pills");
+		}
+		else if (value==4) {
+			var url="sys_res/inj_category.html";
+			$(".pill_category").remove();
+			$.get(url,function(data){
+				$(".drugs_category").after(data);
+			});
+			$("#sp").val("sp_product_registration_inj");
+		}
+		else{
+			$(".pill_category").remove();
+			$(".inj_category").remove();
+			$("#sp").val("sp_product_registration");
 		}
 	});
 	//frm_product_purchase
@@ -475,6 +509,7 @@ $(document).ready(function(){
 				data:{id:value},
 				method:"GET",
 				dataType:'json',
+				async:false,
 				success:function(data){
 					obj.parent().parent().find(".price").val(data.price);
 					obj.parent().parent().find(".a_qty").val(data.a_qty);
@@ -539,6 +574,7 @@ $(document).ready(function(){
 				data:{id:id,type:type},
 				method:"GET",
 				dataType:'json',
+				async:false,
 				success:function(data){
 					obj.parent().parent().find(".price").val(data.price);
 					obj.parent().parent().find(".a_qty").val(data.a_qty);
@@ -631,8 +667,6 @@ $(document).ready(function(){
     		}
     	})
     });
-
-
     //Calculations
     $("body").on("blur",".qty",function(e){
         var quantity_val=parseFloat($(this).val());
