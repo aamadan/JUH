@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['customer'])) {
 	foreach ($_POST["sales_product"] as $key => $value) {
-	$sql="CALL sp_customer_sales('".$_POST['invoice_no']."','".$_POST['customer']."','".$_POST['sales_product'][$key]."','".$_POST['sales_unit'][$key]."','".$_POST['sales_quantity'][$key]."','".$_POST['sales_price'][$key]."','".$_POST['total']."','".$_POST['discount']."','".$_POST['grand_total']."','".$_POST['paid']."','".$_POST['rest']."','".$_POST['user_id']."')";
+	$sql="CALL sp_customer_sales('".$_POST["id"][$key]."','".$_POST['invoice_no']."','".$_POST['customer']."','".$_POST['sales_product'][$key]."','".$_POST['sales_unit'][$key]."','".$_POST['sales_quantity'][$key]."','".$_POST['sales_price'][$key]."','".$_POST['total']."','".$_POST['discount']."','".$_POST['grand_total']."','".$_POST['paid']."','".$_POST['rest']."','".$_POST['user_id']."')";
 	insert($sql);
 	}
 }

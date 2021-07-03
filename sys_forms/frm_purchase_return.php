@@ -2,10 +2,11 @@
             <div class="card card-primary card-outline">
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="actions/insert.php" method="POST" enctype="multipart/form-data" id="sys_form_purchase_return">
+              <form role="form" action="actions/insert.php" method="POST" enctype="multipart/form-data" id="sys_form_res">
+                <input type="hidden" name="sp" value="sp_purchase_return">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                       <div class="form-group">
                         <label for="supplier">Select Supplier</label>
                         <select class="form-control select2" style="width: 100%" name="supplier" id="supplier" required>
@@ -23,7 +24,9 @@
                         </select>
                       </div>
                     </div>  
-                    <div class="col-md-4">
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for="invoice">Select Invoice</label>
                         <select class="form-control select2" style="width: 100%" name="invoice" id="invoice" required>
@@ -31,7 +34,7 @@
                         </select>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for="product">Select Product</label>
                         <select class="form-control select2" style="width: 100%" name="product" id="product" required>
@@ -39,37 +42,43 @@
                         </select>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="return_unit">Select Return Unit</label>
-                        <select class="form-control select2" style="width: 100%" name="return_unit" id="return_unit" required>
-                          <option value="">Select Return Unit</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for="purchasedQuantity">Purchased Quantity</label>
-                        <input type="text" class="form-control" id="purchasedQuantity" value="10" readonly placeholder="Purchase Quantity">
+                        <input type="text" class="form-control" id="purchasedQuantity" value="" readonly placeholder="Purchase Quantity">
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for="returnQuantity">Return Quantity</label>
                         <input type="hidden" id="p_quantity">
                         <input type="text" class="form-control" id="returnQuantity" name="returnQuantity" placeholder="Return Quantity">
                       </div>
-                    </div>
-                    <div class="col-md-4">
-                      <label style="visibility: hidden;">Search</label>
-                      <button class="btn btn-primary btn-block btn-flat"><i class="fas fa-search"></i> Search</button>
                     </div>                 
                   </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" rows="3" id="return_desc" name="return_desc"></textarea>
+                      </div>
+                    </div>
+                  </div>
                   <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">
+                  <input type="hidden" name="id" id="id" value="0">
                 </div>              
                 <!-- /.card-body -->
+                <div class="card-footer">
+                  <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3">
+                      <button type="reset" class="btn btn-default btn-block btn-flat">Cancel</button>
+                    </div>
+                    <div class="col-md-3">
+                      <button class="btn btn-success btn-block btn-flat">Submit</button>
+                    </div>
+                  </div>
+                </div>
               </form>
             </div>
 

@@ -26,7 +26,7 @@ include("../lib/conn.php");
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="customer_email">Customer Email</label>
-                        <input type="email" name="customer_tell" class="form-control" id="customer_tell" placeholder="Enter Supplier Telephone">
+                        <input type="email" name="customer_tell" class="form-control" id="customer_email" placeholder="Enter Supplier Telephone">
                       </div>
                     </div>                                     
                     <div class="col-md-6">

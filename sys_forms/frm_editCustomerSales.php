@@ -5,7 +5,7 @@ include("../lib/conn.php");
               var unit=new Array();
             </script>
             <!-- form start -->
-            <form role="form" action="actions/test2.php" method="POST" enctype="multipart/form-data" id="sys_form_cashSales">
+            <form role="form" action="actions/test2.php" method="POST" enctype="multipart/form-data" id="sys_form_customerSales">
 
               <div class="card card-primary card-outline">
                 <input type="hidden" name="sp" value="sp_supplier" id="sp_purchase">
@@ -13,23 +13,48 @@ include("../lib/conn.php");
                   <h3>Invoice Information</h3>
                   <hr>
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for="invoice_no">Invoice Number</label>
                         <input type="text" name="invoice_no" id="invoice_no" class="form-control" placeholder="Enter Invoice Number" required readonly value="<?php echo $_GET['invoice']?>">
                       </div>
                     </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label>Enter Customer Name</label>
-                        <?php
-                        include '../lib/conn.php';
-                        $sql="SELECT DISTINCT(customer_name) FROM cash_sales WHERE invoice_no='$_GET[invoice]'";
+                    <?php
+                        $sql="SELECT c.id,c.max_balance,a.amount FROM customer_sales s INNER JOIN customer c ON c.id=s.customer_id INNER JOIN account_receivable a ON a.customer_id=c.id WHERE invoice_no='$_GET[invoice]'";
+                       // echo $sql;
                         $res=$conn->query($sql);
                         $row=$res->fetch_assoc();
-                        ?>
-                        <input type="text" name="customer_name" id="customer_name" class="form-control" value="<?php echo $row['customer_name']?>">
+                        $customer_id=$row["id"];
+                        $current_balance=$row["amount"];
+                        $max_balance=$row["max_balance"];
+                    ?>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Select Customer</label>
+                        <select class="form-control select2" style="width: 100%;" name="customer" id="customer" required>
+                          <option value="">Select Customer</option>
+                          <?php
+                          include '../lib/conn.php';
+                                  $sql="SELECT id,name FROM customer";
+                                  $res=$conn->query($sql);
+                                  while ($row=$res->fetch_assoc()) {
+                                ?>
+                                  <option <?php echo $row["id"]==$customer_id? "selected":'';?> value="<?php echo $row['id']?>"><?php echo $row['name']?></option>
+                                <?php
+                                  }
+                                ?>
+                        </select>
                       </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Current Balance</label>
+                        <input type="text" class="form-control" readonly placeholder="Current Balance" id="current_balance" value="<?php echo $current_balance?>">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Maximum Allowed Balance</label>
+                      <input type="text" class="form-control" readonly placeholder="Maximum Allowed Balance"id="max_balance" value="<?php echo $max_balance?>">
                     </div>                                    
                   </div>
                 </div>
@@ -59,7 +84,7 @@ include("../lib/conn.php");
                           </thead>
                           <tbody>
                              <?php
-                              $invoice_data="CALL rp_cash_sales_invoice_items('$_GET[invoice]')";
+                              $invoice_data="CALL rp_customer_sales_invoice_items('$_GET[invoice]')";
                               $invoice_result=$conn->query($invoice_data);
                               $i=1;
                               while ($invoice_row=$invoice_result->fetch_assoc()) {

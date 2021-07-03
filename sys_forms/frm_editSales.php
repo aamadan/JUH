@@ -8,7 +8,8 @@ if ($row["sales_type"]=="Cash") {
 	$form_label="Edit Cash Sales";
 }
 elseif ($row["sales_type"]=="Customer") {
-	$form="frm_customerSales.php";
+	$form="frm_editCustomerSales.php?invoice=".$_GET["invoice"];
+	$form_label="Edit Customer Sales";
 }
 elseif($row["sales_type"]=="Prescription"){
 	$form="frm_prescriptionSales.php";

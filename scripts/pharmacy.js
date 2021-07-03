@@ -112,6 +112,9 @@ $(document).ready(function(){
 				}
 			});
 		}
+		else{
+			checked=1;
+		}
 		submit();
 		function submit(){
 			alert("submitting");
@@ -123,6 +126,7 @@ $(document).ready(function(){
 						data.append("sales_unit[]",$(this).parent().parent().find(".sales_unit").val());
 						data.append("sales_quantity[]",$(this).parent().parent().find(".qty").val());
 						data.append("sales_price[]",$(this).parent().parent().find(".price").val());
+						data.append("id[]",$(this).parent().parent().find(".id").val());
 						sales_valid=1;
 					}
 				});	
@@ -173,6 +177,7 @@ $(document).ready(function(){
 					data.append("sales_unit[]"," ");
 					data.append("sales_quantity[]",$(this).parent().parent().parent().parent().find(".qty").val());
 					data.append("sales_price[]",$(this).parent().parent().parent().parent().find(".price").val());
+					data.append("id[]",$(this).parent().parent().find(".id").val());
 					sales_valid=1;
 				}
 			})	
@@ -202,30 +207,21 @@ $(document).ready(function(){
 		//Drug categories
 	//Get extra inputs if the type is pill
 	$("body").on("change","#drug_category",function(){
-		alert("What");
-		var value=$(this).val();
-		if (value==1 || value==2 || value==5) {
-			var url="sys_res/stripes_category.html";
-			$(".inj_category").remove();
-			$(".pill_category").remove();
-			$.get(url,function(data){
-				$(".drugs_category").after(data);
-			});
-			$("#sp").val("sp_product_registration_pills");
-		}
-		else if (value==4) {
-			var url="sys_res/inj_category.html";
-			$(".pill_category").remove();
-			$.get(url,function(data){
-				$(".drugs_category").after(data);
-			});
-			$("#sp").val("sp_product_registration_inj");
-		}
-		else{
-			$(".pill_category").remove();
-			$(".inj_category").remove();
-			$("#sp").val("sp_product_registration");
-		}
+		var id=$(this).val();
+		var url="sys_res/drug_category.php?id="+id;
+		$.get(url,function(data){
+			if (data==1) {
+				if (!$(".stripes").length) {
+					var inputs='<div class="col-md-4 stripes"><div class="form-group"><label>Num of Stripe Per Pack</label><input type="text" class="form-control" name="num_stp" id="num_stp" required placeholder="Num of Stripe Per Pack"></div></div>	<div class="col-md-4 stripes">		<div class="form-group">			<label>Num of Pieces Per Stripe</label>			<input type="text" class="form-control" name="num_pieces" id="num_pieces" required placeholder="Num of Pieces Per Stripe">		</div>	</div>'
+					$(".drugs_category").after(inputs);
+					$("#sp").val("sp_product_registration_stripes");
+				}
+			}
+			else{
+				$(".stripes").remove();
+				$("#sp").val("sp_product_registration");
+			}
+		});
 	});
 	//frm_product_purchase
 	$("body").on("change",".purchase_product",function(){
@@ -643,14 +639,35 @@ $(document).ready(function(){
     		method:"GET",
     		dataType:'json',
     		success:function(data){
-    			$("#return_unit").empty();
-    			$("#return_unit").append(data.options);
+    			// $("#return_unit").empty();
+    			// $("#return_unit").append(data.options);
     			$("#purchasedQuantity").val(data.purchased_quantity);
     			$("#p_quantity").val(data.p_quantity);
 
     		}
     	})
     })
+    $("body").on("keypress","#returnQuantity",function(e){
+	    if($(this).val().length == 0){
+	    	if($(this).next().val() == ""){
+	    		toastr.success("Please select product from product list");
+	    		e.preventDefault();
+	    	}
+	    	else{
+	    		if(Number(e.key) > $(this).prev().val()){
+		    		toastr.error("That quantity is more than you bought");
+		    		e.preventDefault();
+	    		}
+	    	}    		
+	    }
+	    else{
+	    	var requested_quantity=Number($(this).val()+e.key);
+		    if(requested_quantity > $(this).prev().val()){
+		    	toastr.error("That quantity is more than you bought");
+		    	e.preventDefault();
+		    }
+	    }
+    });
     $("body").on("submit","#sys_form_purchase_return",function(e){
     	e.preventDefault();
     	var url="sys_forms/frm_productPurchaseReturn.php";

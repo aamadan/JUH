@@ -202,8 +202,13 @@ include("../lib/conn.php");
               }
             ?>
             <script>
-              $(".purchase_product").trigger("change");
               unit.push("<?php echo $value_unit?>");
+            </script>
+            <?php
+            }
+            ?>
+            <script>
+              $(".purchase_product").trigger("change");
               var i=0;
               var id=1;
               $(".purchase_product").each(function(){                
@@ -212,10 +217,6 @@ include("../lib/conn.php");
                 id++;
               });
             </script>
-            <?php
-            }
-
-            ?>
             <script type="text/javascript">
               $(document).ready(function () {
                 bsCustomFileInput.init();

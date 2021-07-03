@@ -84,6 +84,7 @@ include("../lib/conn.php");
                             <tr>
                               <td width="7%">1</td>
                               <td width="30%">
+                                <input type="hidden" class="id" value="0">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product1">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php

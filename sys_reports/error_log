@@ -1,0 +1,108 @@
+[10-May-2021 09:07:30 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[10-May-2021 09:14:33 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[10-May-2021 09:14:58 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[10-May-2021 09:18:40 America/Chicago] PHP Warning:  mysqli::__construct(): (HY000/1040): Too many connections in /home4/mahurnpc/public_html/lib/conn.php on line 2
+[10-May-2021 09:18:40 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 30
+[10-May-2021 09:18:40 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[10-May-2021 09:18:49 America/Chicago] PHP Warning:  mysqli::__construct(): (HY000/1040): Too many connections in /home4/mahurnpc/public_html/lib/conn.php on line 2
+[10-May-2021 09:18:49 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 30
+[10-May-2021 09:18:49 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[10-May-2021 09:52:45 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[10-May-2021 09:52:45 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[10-May-2021 10:22:50 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[10-May-2021 11:28:04 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[10-May-2021 11:28:25 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[11-May-2021 07:50:12 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[11-May-2021 07:50:16 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[11-May-2021 07:50:29 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[11-May-2021 07:51:42 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[11-May-2021 08:47:06 America/Chicago] PHP Warning:  mysqli::__construct(): (HY000/1040): Too many connections in /home4/mahurnpc/public_html/lib/conn.php on line 2
+[11-May-2021 08:47:06 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php on line 161
+[11-May-2021 08:47:06 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php:162
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php on line 162
+[11-May-2021 08:47:25 America/Chicago] PHP Warning:  mysqli::__construct(): (HY000/1040): Too many connections in /home4/mahurnpc/public_html/lib/conn.php on line 2
+[11-May-2021 08:47:25 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php on line 161
+[11-May-2021 08:47:25 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php:162
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php on line 162
+[16-May-2021 12:07:27 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_room.php:26
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_room.php on line 26
+[16-May-2021 12:07:27 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_room.php:26
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_room.php on line 26
+[20-May-2021 09:34:00 America/Chicago] PHP Warning:  mysqli::__construct(): (HY000/1040): Too many connections in /home4/mahurnpc/public_html/lib/conn.php on line 2
+[20-May-2021 09:34:01 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php on line 161
+[20-May-2021 09:34:01 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php:162
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php on line 162
+[20-May-2021 09:34:32 America/Chicago] PHP Warning:  mysqli::__construct(): (HY000/1040): Too many connections in /home4/mahurnpc/public_html/lib/conn.php on line 2
+[20-May-2021 09:34:32 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php on line 161
+[20-May-2021 09:34:32 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php:162
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php on line 162
+[20-May-2021 09:38:39 America/Chicago] PHP Warning:  mysqli::__construct(): (HY000/1040): Too many connections in /home4/mahurnpc/public_html/lib/conn.php on line 2
+[20-May-2021 09:38:39 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php on line 161
+[20-May-2021 09:38:39 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php:162
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_prescription.php on line 162
+[20-May-2021 09:46:19 America/Chicago] PHP Warning:  mysqli::__construct(): (HY000/1040): Too many connections in /home4/mahurnpc/public_html/lib/conn.php on line 2
+[20-May-2021 09:46:19 America/Chicago] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 30
+[20-May-2021 09:46:19 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php:32
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_sales.php on line 32
+[20-May-2021 13:34:35 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home4/mahurnpc/public_html/sys_reports/rpt_room.php:26
+Stack trace:
+#0 {main}
+  thrown in /home4/mahurnpc/public_html/sys_reports/rpt_room.php on line 26

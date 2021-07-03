@@ -89,13 +89,13 @@
         .payment_td{
             border:1px solid black;
             padding: 5px;
-            font-size: 10px;
+            font-size: 12px;
             font-family: "roboto regular";
         }
         .items_table_td{
             border:1px solid black;
             padding: 5px;
-            font-size: 10px;
+            font-size: 12px;
             font-family: "roboto regular";
         }
         .header_info{
@@ -125,12 +125,14 @@
             color:#276AB4;
             border:1px solid #276AB4;
         }
-        #dr{
-        	position: absolute;
+        #footer_table{
+            position: absolute;
         	top:475px;
         	display: block;
         	width: 100%;
-        	text-align: center;
+        }
+        .footer_text{
+            font-size:12px;
         	font-family: "roboto medium";
         	letter-spacing: 1px;
         }
@@ -156,8 +158,14 @@
         </thead>
     </table>
     <?php
+    date_default_timezone_set("Africa/Mogadishu");
     include '../lib/conn.php';
-    $sql="SELECT pt.name,g.name 'gender',pt.age,p.prescription_serial FROM prescription p INNER JOIN patient pt ON p.patient_id=pt.id INNER JOIN gender g on pt.gender=g.id WHERE prescription_serial=(SELECT value-1 from setup WHERE name='prescription_serial')";
+    if (isset($_GET["p_no"])) {
+        $sql="SELECT pt.name,g.name 'gender',pt.age,p.prescription_serial FROM prescription p INNER JOIN patient pt ON p.patient_id=pt.id INNER JOIN gender g on pt.gender=g.id WHERE prescription_serial='$_GET[p_no]'";
+    }
+    else{
+        $sql="SELECT pt.name,g.name 'gender',pt.age,p.prescription_serial FROM prescription p INNER JOIN patient pt ON p.patient_id=pt.id INNER JOIN gender g on pt.gender=g.id WHERE prescription_serial=(SELECT value-1 from setup WHERE name='prescription_serial')"; 
+    }
 	$res=$conn->query($sql);
     $row=$res->fetch_assoc();
     // print_r($row);
@@ -192,7 +200,13 @@
         <tbody>
         	<?php
         		include '../lib/conn.php';
-        		$sql="SELECT  pi.brand_name,c.name'country',d.name'category',p.quantity,p.frequency,p.duration,p.instruction FROM prescription p INNER JOIN product_info pi ON pi.id=p.drug_id INNER JOIN country c ON pi.country=c.id INNER JOIN drug_category d ON pi.category=d.id WHERE prescription_serial=(SELECT value-1 from setup WHERE name='prescription_serial')";
+                if (isset($_GET["p_no"])) {
+                   $sql="SELECT  pi.brand_name,c.name'country',d.name'category',p.quantity,p.frequency,p.duration,p.instruction FROM prescription p INNER JOIN product_info pi ON pi.id=p.drug_id INNER JOIN country c ON pi.country=c.id INNER JOIN drug_category d ON pi.category=d.id WHERE prescription_serial='$_GET[p_no]'"; 
+                }
+                else{
+                    $sql="SELECT  pi.brand_name,c.name'country',d.name'category',p.quantity,p.frequency,p.duration,p.instruction FROM prescription p INNER JOIN product_info pi ON pi.id=p.drug_id INNER JOIN country c ON pi.country=c.id INNER JOIN drug_category d ON pi.category=d.id WHERE prescription_serial=(SELECT value-1 from setup WHERE name='prescription_serial')";
+                }
+        		
 				$res=$conn->query($sql);
 				$i=1;
         		while ($row=$res->fetch_assoc()) {
@@ -214,12 +228,23 @@
     </table>
     <?php
     	include '../lib/conn.php';
-    	$sql="SELECT d.name from prescription p INNER JOIN doctor d on p.doctor_id=d.id WHERE prescription_serial=(SELECT value-1 from setup WHERE name='prescription_serial')";
+        if (isset($_GET["p_no"])) {
+            $sql="SELECT d.name from prescription p INNER JOIN doctor d on p.doctor_id=d.id WHERE prescription_serial='$_GET[p_no]'";
+        }
+        else{
+            $sql="SELECT d.name from prescription p INNER JOIN doctor d on p.doctor_id=d.id WHERE prescription_serial=(SELECT value-1 from setup WHERE name='prescription_serial')";
+        }
 		$res=$conn->query($sql);
 		$row=$res->fetch_assoc();
     ?>
-    <p id="dr">Dr <?php echo $row["name"]?></p>
-    <p id="signature">______________________________________</p>
+    <table id="footer_table">
+        <tr>
+            <td class="footer_text">Dr <?php echo $row["name"]?>: </td>
+            <td>______________________________________<br><spna class="footer_text"><?php echo date("d-F-Y")?></spna></td>
+        </tr>
+    </table>
+    <p id="dr"></p>
+    <p id="signature"></p>
     <button id="print">Print</button>
 </body>
 </html>

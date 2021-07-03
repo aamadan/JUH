@@ -301,10 +301,8 @@ include("../lib/conn.php");
                     </div>
                   </div> 
                 </div>
-              </div>
-                              
-                <!-- /.card-body -->
-                               
+              </div>         
+                <!-- /.card-body -->                
             </form>
             <!-- Message Modal-->
             <div class="container-fluid">

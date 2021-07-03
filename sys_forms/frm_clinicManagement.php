@@ -1,4 +1,4 @@
-        <?php session_start();?>
+<?php session_start();?>
         <div class="card card-primary card-outline">
           <div class="card-body">
             <div class="row">
@@ -42,8 +42,7 @@
 			<input type="hidden" name="ticket_no" id="ticket_no" value="<?php echo $_GET["ticket"];?>">
             <input type="hidden" value="<?php echo $_GET['ticket_date']?>" id="visit_date">
             <input type="hidden" id="doctor_id" value="<?php echo $_SESSION['id'];?>">
-            <input type="hidden" id="user_id" value="<?php echo $_SESSION['user_id'];?>">
-            
+            <input type="hidden" id="user_id" value="<?php echo $_SESSION["user_id"];?>">
             <hr>
 			
 					<div class="row">
@@ -515,7 +514,7 @@
                       <div class="col-md-3">
                         <div class="form-group">
                           <label for="route">Route/Instruction</label>
-                          <input type="text" name="route" id="route" class="form-control number" placeholder="Enter Duration">
+                          <input type="text" name="route" id="route" class="form-control" placeholder="Enter Route">
                         </div>
                       </div>
                     </div>

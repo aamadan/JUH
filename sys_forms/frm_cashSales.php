@@ -94,7 +94,6 @@ include("../lib/conn.php");
                             <tr >
                               <td width="7%">2</td>
                               <td width="30%">
-                                <input type="hidden" class="id" value="0">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product2">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
@@ -133,7 +132,6 @@ include("../lib/conn.php");
                             <tr >
                               <td width="7%">3</td>
                               <td width="30%">
-                                <input type="hidden" class="id" value="0">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product3">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
@@ -172,7 +170,6 @@ include("../lib/conn.php");
                             <tr >
                               <td width="7%">4</td>
                               <td width="30%">
-                                <input type="hidden" class="id" value="0">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product4">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
@@ -211,7 +208,6 @@ include("../lib/conn.php");
                             <tr >
                               <td width="7%">5</td>
                               <td width="30%">
-                                <input type="hidden" class="id" value="0">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product5">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php

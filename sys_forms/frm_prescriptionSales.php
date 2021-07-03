@@ -2,7 +2,7 @@
 include("../lib/conn.php");
 ?>
             <!-- form start -->
-            <form role="form" action="actions/test3.php" method="POST" enctype="multipart/form-data" id="sys_form_prescriptionSales">
+            <form role="form" action="actions/test2.php" method="POST" enctype="multipart/form-data" id="sys_form_prescriptionSales">
               <div class="card card-primary card-outline" id="invoice_info">
                 <input type="hidden" name="sp" value="sp_supplier" id="sp_purchase">
                 <div class="card-body">

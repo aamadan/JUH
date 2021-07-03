@@ -22,7 +22,7 @@
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- <script src="scripts/login.js?v=1.0"></script> -->
-<script src="scripts/pharmacy.js?v=1.9"></script>
+<script src="scripts/pharmacy.js?v=2.4"></script>
 <script src="scripts/forms.js?v=2.32"></script>
 <script src="scripts/validations.js?v=0.01"></script>
 <!-- ChartJS -->
