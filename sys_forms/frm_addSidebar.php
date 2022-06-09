@@ -18,17 +18,18 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="">Sidebar Text</label>
-                        <input type="text" name="text"class="form-control" id="text" placeholder="Enter Sidebar Name" required>
+                        <input type="text" name="submenu_text"class="form-control" id="submenu_text" placeholder="Enter Sidebar Name" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="">Link</label>
-                        <input type="text" name="link"class="form-control" id="link" placeholder="Enter Link Name" required>
+                        <input type="text" name="submenu_link"class="form-control" id="submenu_link" placeholder="Enter Link Name" required>
 
                       </div>
                     </div>                    
                   </div>
+                  <input type="hidden" name="id" id="id" value="0">
                   <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">
                 </div>
               
