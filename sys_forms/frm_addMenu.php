@@ -20,6 +20,7 @@
                       </div>
                     </div>                    
                   </div>
+                  <input type="hidden" name="id"  id="id" value="<?php echo $_SESSION['user_id'];?>">
                   <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">
                 </div>
               

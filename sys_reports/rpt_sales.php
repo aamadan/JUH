@@ -3,8 +3,6 @@
             <div class="card-body">
                <a href="sys_forms/frm_cashSales.php" data-form-label="Cash Sales" class="update_link"><button class="btn btn-primary"> <span class="fas fa-money-bill"></span> Cash Sales</button> </a>
                <a href="sys_forms/frm_customerSales.php" data-form-label="Customer Sales" class="update_link"><button class="btn btn-primary"> <span class="fas fa-user-tie"></span> Customer Sales</button> </a>
-               <a href="sys_forms/frm_prescriptionSales.php" data-form-label="Prescription Sales" class="update_link"><button class="btn btn-primary"> <span class="fas fa-file-prescription"></span> Prescription Sales</button> </a>
-               <a href="sys_forms/frm_addLab.php" data-form-label="Edit Customer" class="update_link"><button class="btn btn-primary btn-sm"> <span class="fas fa-plus mr-3"></span> Add New</button> </a>
               <div class="table-responsive">
                 <table id="rpt" class="table table-hover text-nowrap">
                   <thead>

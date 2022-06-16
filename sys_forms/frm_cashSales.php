@@ -4,7 +4,6 @@ include("../lib/conn.php");
             <!-- form start -->
             <form role="form" action="actions/test2.php" method="POST" enctype="multipart/form-data" id="sys_form_cashSales">
               <div class="card card-primary card-outline" id="invoice_info">
-                <input type="hidden" name="sp" value="sp_supplier" id="sp_purchase">
                 <div class="card-body">
                   <h3>Invoice Information</h3>
                   <hr>
@@ -42,8 +41,7 @@ include("../lib/conn.php");
                           <thead>
                             <tr>
                               <th width="5%">No</th>
-                              <th width="30%">Item Name</th>
-                              <th width="16%">Purchase Unit</th>
+                              <th width="40%">Item Name</th>
                               <th width="15%" align="center">A.Quantity</th>
                               <th width="10%" align="center">Quantity</th>
                               <th width="10%" align="center">Price</th>
@@ -54,24 +52,19 @@ include("../lib/conn.php");
                           <tbody>
                             <tr>
                               <td width="7%">1</td>
-                              <td width="30%">
+                              <td width="40%">
                                 <input type="hidden" class="id" value="0">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product1">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
-                                  $sql="SELECT p.id,p.brand_name,c.name,ca.name 'category' FROM product_info p INNER JOIN country c ON c.id=p.country INNER JOIN drug_category ca ON ca.id=p.category WHERE p.qty >0";
+                                  $sql="SELECT p.id,p.name,p.watt,p.amp,p.port,p.cable_size FROM products p WHERE p.quantity >0";
                                   $res=$conn->query($sql);
                                   while ($row=$res->fetch_assoc()) {
                                   ?>
-                                  <option value="<?php echo $row['id']?>"><?php echo $row["brand_name"]." ".$row["category"]." ".$row['name']?></option>
+                                  <option value="<?php echo $row['id']?>"><?php echo $row["name"]." - ".$row["watt"]." - ".$row['amp']." - ".$row["port"]." - ".$row["cable_size"]?></option>
                                   <?php
                                   }
                                   ?>
-                                </select>
-                              </td>
-                              <td width="16%">
-                                <select class="select2 form-control sales_unit" style="width: 100%" id="sales_unit1">
-                                  <option value="">Select Sales Unit</option>
                                 </select>
                               </td>
                               <td width="15%">
@@ -82,7 +75,7 @@ include("../lib/conn.php");
                                 <input type="hidden" class="form-control ap_qty number">
                               </td>
                               <td width="10%">
-                                <input type="text" class="form-control price number" readonly>
+                                <input type="text" class="form-control price number">
                               </td>
                               <td width="14%">
                                 <input type="text" class="form-control amount" readonly>
@@ -93,23 +86,18 @@ include("../lib/conn.php");
                             </tr>
                             <tr >
                               <td width="7%">2</td>
-                              <td width="30%">
+                              <td width="40%">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product2">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
-                                    $sql="SELECT p.id,p.brand_name,c.name,ca.name 'category' FROM product_info p INNER JOIN country c ON c.id=p.country INNER JOIN drug_category ca ON ca.id=p.category WHERE p.qty >0";
+                                    $sql="SELECT p.id,p.name,p.watt,p.amp,p.port,p.cable_size FROM products p WHERE p.quantity >0";
                                     $res=$conn->query($sql);
                                     while ($row=$res->fetch_assoc()) {
                                   ?>
-                                  <option value="<?php echo $row['id']?>"><?php echo $row["brand_name"]." ".$row["category"]." ".$row['name']?><option>
+                                  <option value="<?php echo $row['id']?>"><?php echo $row["name"]." - ".$row["watt"]." - ".$row['amp']." - ".$row["port"]." - ".$row["cable_size"]?><option>
                                   <?php
                                     }
                                   ?>
-                                </select>
-                              </td>
-                              <td width="16%">
-                                <select class="select2 form-control sales_unit" style="width: 100%" id="sales_unit2">
-                                  <option value="">Select Sales Unit</option>
                                 </select>
                               </td>
                               <td width="15%">
@@ -120,7 +108,7 @@ include("../lib/conn.php");
                                 <input type="hidden" class="form-control ap_qty number">
                               </td>
                               <td width="10%">
-                                <input type="text" class="form-control price number" readonly>
+                                <input type="text" class="form-control price number">
                               </td>
                               <td width="14%">
                                 <input type="text" class="form-control amount" readonly>
@@ -131,23 +119,18 @@ include("../lib/conn.php");
                             </tr>
                             <tr >
                               <td width="7%">3</td>
-                              <td width="30%">
+                              <td width="40%">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product3">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
-                                    $sql="SELECT p.id,p.brand_name,c.name,ca.name 'category' FROM product_info p INNER JOIN country c ON c.id=p.country INNER JOIN drug_category ca ON ca.id=p.category WHERE p.qty >0";
+                                    $sql="SELECT p.id,p.name,p.watt,p.amp,p.port,p.cable_size FROM products p WHERE p.quantity >0";
                                     $res=$conn->query($sql);
                                     while ($row=$res->fetch_assoc()) {
                                   ?>
-                                  <option value="<?php echo $row['id']?>"><?php echo $row["brand_name"]." ".$row["category"]." ".$row['name']?></option>
+                                  <option value="<?php echo $row['id']?>"><?php echo $row["name"]." - ".$row["watt"]." - ".$row['amp']." - ".$row["port"]." - ".$row["cable_size"]?></option>
                                   <?php
                                     }
                                   ?>
-                                </select>
-                              </td>
-                              <td width="16%">
-                                <select class="select2 form-control sales_unit" style="width: 100%" id="sales_unit3">
-                                  <option value="">Select Sales Unit</option>
                                 </select>
                               </td>
                               <td width="15%">
@@ -158,7 +141,7 @@ include("../lib/conn.php");
                                 <input type="hidden" class="form-control ap_qty number">
                               </td>
                               <td width="10%">
-                                <input type="text" class="form-control price number" readonly>
+                                <input type="text" class="form-control price number">
                               </td>
                               <td width="14%">
                                 <input type="text" class="form-control amount" readonly>
@@ -169,23 +152,18 @@ include("../lib/conn.php");
                             </tr>
                             <tr >
                               <td width="7%">4</td>
-                              <td width="30%">
+                              <td width="40%">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product4">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
-                                    $sql="SELECT p.id,p.brand_name,c.name,ca.name 'category' FROM product_info p INNER JOIN country c ON c.id=p.country INNER JOIN drug_category ca ON ca.id=p.category WHERE p.qty >0";
+                                    $sql="SELECT p.id,p.name,p.watt,p.amp,p.port,p.cable_size FROM products p WHERE p.quantity >0";
                                     $res=$conn->query($sql);
                                     while ($row=$res->fetch_assoc()) {
                                   ?>
-                                  <option value="<?php echo $row['id']?>"><?php echo $row["brand_name"]." ".$row["category"]." ".$row['name']?><option>
+                                  <option value="<?php echo $row['id']?>"><?php echo $row["name"]." - ".$row["watt"]." - ".$row['amp']." - ".$row["port"]." - ".$row["cable_size"]?><option>
                                   <?php
                                     }
                                   ?>
-                                </select>
-                              </td>
-                              <td width="16%">
-                                <select class="select2 form-control sales_unit" style="width: 100%" id="sales_unit4">
-                                  <option value="">Select Sales Unit</option>
                                 </select>
                               </td>
                               <td width="15%">
@@ -196,7 +174,7 @@ include("../lib/conn.php");
                                 <input type="hidden" class="form-control ap_qty number">
                               </td>
                               <td width="10%">
-                                <input type="text" class="form-control price number" readonly>
+                                <input type="text" class="form-control price number">
                               </td>
                               <td width="14%">
                                 <input type="text" class="form-control amount" readonly>
@@ -207,23 +185,18 @@ include("../lib/conn.php");
                             </tr>
                             <tr >
                               <td width="7%">5</td>
-                              <td width="30%">
+                              <td width="40%">
                                 <select class="form-control select2 sales_product" style="width: 100%;"  id="sales_product5">
                                   <option selected="selected" value="">Select Product</option>
                                   <?php
-                                    $sql="SELECT p.id,p.brand_name,c.name,ca.name 'category' FROM product_info p INNER JOIN country c ON c.id=p.country INNER JOIN drug_category ca ON ca.id=p.category WHERE p.qty >0";
+                                    $sql="SELECT p.id,p.name,p.watt,p.amp,p.port,p.cable_size FROM products p WHERE p.quantity >0";
                                     $res=$conn->query($sql);
                                     while ($row=$res->fetch_assoc()) {
                                   ?>
-                                  <option value="<?php echo $row['id']?>"><?php echo $row["brand_name"]." ".$row["category"]." ".$row['name']?></option>
+                                  <option value="<?php echo $row['id']?>"><?php echo $row["name"]." - ".$row["watt"]." - ".$row['amp']." - ".$row["port"]." - ".$row["cable_size"]?></option>
                                   <?php
                                     }
                                   ?>
-                                </select>
-                              </td>
-                              <td width="16%">
-                                <select class="select2 form-control sales_unit" style="width: 100%" id="sales_unit5">
-                                  <option value="">Select Sales Unit</option>
                                 </select>
                               </td>
                               <td width="15%">
@@ -234,7 +207,7 @@ include("../lib/conn.php");
                                 <input type="hidden" class="form-control ap_qty number">
                               </td>
                               <td width="10%">
-                                <input type="text" class="form-control price number" readonly>
+                                <input type="text" class="form-control price number">
                               </td>
                               <td width="14%">
                                 <input type="text" class="form-control amount" readonly>

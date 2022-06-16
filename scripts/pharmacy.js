@@ -117,9 +117,7 @@ $(document).ready(function(){
 		}
 		submit();
 		function submit(){
-			alert("submitting");
 			if(checked ==1){
-				alert("done");
 				$(".sales_product").each(function(){
 					if ($(this).val()) {
 						data.append("sales_product[]",$(this).val());
@@ -524,20 +522,15 @@ $(document).ready(function(){
     // })
     $("body").on("keypress",".sales_qty",function(e){
     	if($(this).val().length == 0){
-    		if($(this).next().val() == ""){
-    			toastr.success("Please choose sales unit first");
-    			e.preventDefault();
-    		}
-    		else{
-    			if(Number(e.key) > $(this).next().val()){
-    			toastr.error("That quantity is not available");
-    			e.preventDefault();
-    			}
-    		}    		
+			if(Number(e.key) > $(this).parent().prev().find(".a_qty").val()){
+				alert($(this).parent().prev().find(".a_qty").val());
+				toastr.error("That quantity is not available");
+				e.preventDefault();
+			}    		
     	}
     	else{
     		var requested_quantity=Number($(this).val()+e.key);
-	    	if(requested_quantity > $(this).next().val()){
+	    	if(requested_quantity > $(this).parent().prev().find(".a_qty").val()){
 	    		toastr.error("That quantity is not available");
 	    		e.preventDefault();
 	    	}
